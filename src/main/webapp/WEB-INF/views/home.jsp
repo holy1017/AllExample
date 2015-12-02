@@ -13,5 +13,7 @@
 	<ul>
 		<li><a href="spring4-mvc-ajax-example/">spring4-mvc-ajax-example/</a></li>
 	</ul>
+	
+	<%@include file="/WEB-INF/debug/debug.jsp" %>
 </body>
 </html>

@@ -127,5 +127,7 @@
 	}
 </script>
 
+<%@include file="/WEB-INF/debug/debug.jsp" %>
+
 </body>
 </html>
