@@ -4,12 +4,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.mkyong.config.SpringWebConfig;
 
-public class MyWebInitializer extends
-		AbstractAnnotationConfigDispatcherServletInitializer {
+public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { SpringWebConfig.class };
+		return new Class[] { SpringWebConfig.class };// SpringWebConfig.java
 	}
 
 	@Override
