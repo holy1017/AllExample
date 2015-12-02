@@ -2,7 +2,10 @@ package com.JspServlet;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,8 +58,25 @@ public class JspServletController {
 
 	public int toInt(String num, HttpServletRequest req) {
 		logger.debug(req.getParameter(num));
-		//String n=req.getParameter(num);
+		// String n=req.getParameter(num);
 		return Integer.parseInt((String) req.getParameter(num));
+	}
+
+	@RequestMapping(value = "/bbs-post")
+	@ResponseBody
+	public Map<String, String> bbsPost(Locale locale, Model model, HttpServletRequest req, HttpServletResponse res) {
+		logger.debug("bbsPost");
+
+		Map<String,String> map = new HashMap();
+		reqToMap(req,"name", map);
+		reqToMap(req,"title", map);
+		reqToMap(req,"content", map);
+
+		return map;
+	}
+
+	private void reqToMap(HttpServletRequest req, String name,Map<String, String> map) {
+		map.put(name, req.getParameter(name));
 	}
 
 }
