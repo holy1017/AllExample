@@ -22,7 +22,7 @@
 	</logger>
 
 	<logger
-		name="com.mkyong.ajax"
+		name="com.mkyong"
 		level="debug"
 		additivity="false"
 	>

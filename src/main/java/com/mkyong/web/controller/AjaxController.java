@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +22,16 @@ import com.mkyong.web.model.User;
 @RestController
 public class AjaxController {
 
+	private static final Logger log = LoggerFactory.getLogger(AjaxController.class);
+
 	List<User> users;
 
-	// @ResponseBody, not necessary, since class is annotated with @RestController
-	// @RequestBody - Convert the json data into object (SearchCriteria) mapped by field name.
-	// @JsonView(Views.Public.class) - Optional, limited the json data display to client.
+	// @ResponseBody, not necessary, since class is annotated with
+	// @RestController
+	// @RequestBody - Convert the json data into object (SearchCriteria) mapped
+	// by field name.
+	// @JsonView(Views.Public.class) - Optional, limited the json data display
+	// to client.
 	@JsonView(Views.Public.class)
 	@RequestMapping(value = "/search/api/getSearchResult")
 	public AjaxResponseBody getSearchResultViaAjax(@RequestBody SearchCriteria search) {
@@ -47,7 +55,8 @@ public class AjaxController {
 			result.setMsg("Search criteria is empty!");
 		}
 
-		//AjaxResponseBody will be converted into json format and send back to client.
+		// AjaxResponseBody will be converted into json format and send back to
+		// client.
 		return result;
 
 	}
@@ -67,9 +76,13 @@ public class AjaxController {
 		return valid;
 	}
 
+	// 초기화메서드. 이 클래스가 생성될때 작동
 	// Init some users for testing
 	@PostConstruct
 	private void iniDataForTesting() {
+
+		log.debug("iniDataForTesting");
+
 		users = new ArrayList<User>();
 
 		User user1 = new User("mkyong", "pass123", "mkyong@yahoo.com", "012-1234567", "address 123");
@@ -79,6 +92,13 @@ public class AjaxController {
 		users.add(user2);
 		users.add(user3);
 
+	}
+
+	//이 클래스가 죽을때 작동하는듯
+	@PreDestroy
+	public void close() {
+		// 자원 반환등 종료
+		log.debug("close");
 	}
 
 	// Simulate the search function
