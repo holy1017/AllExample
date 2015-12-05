@@ -24,14 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class JspServletController {
 
-	private static final Logger logger = LoggerFactory.getLogger(JspServletController.class);
+	private static final Logger log = LoggerFactory.getLogger(JspServletController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.debug("Welcome home! The client locale is {}.", locale);
+		log.debug("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -46,7 +46,7 @@ public class JspServletController {
 	@RequestMapping(value = "/adder")
 	@ResponseBody
 	public int adder(Locale locale, Model model, HttpServletRequest req, HttpServletResponse res) {
-		logger.debug("adder");
+		log.debug("adder");
 
 		// model.getParameter("result", toInt("num1", req) + toInt("num2",
 		// req));
@@ -57,7 +57,7 @@ public class JspServletController {
 	}
 
 	public int toInt(String num, HttpServletRequest req) {
-		logger.debug(req.getParameter(num));
+		log.debug(req.getParameter(num));
 		// String n=req.getParameter(num);
 		return Integer.parseInt((String) req.getParameter(num));
 	}
@@ -65,7 +65,7 @@ public class JspServletController {
 	@RequestMapping(value = "/bbs-post")
 	@ResponseBody
 	public Map<String, String> bbsPost(Locale locale, Model model, HttpServletRequest req, HttpServletResponse res) {
-		logger.debug("bbsPost");
+		log.debug("bbsPost");
 
 		Map<String,String> map = new HashMap();
 		reqToMap(req,"name", map);
